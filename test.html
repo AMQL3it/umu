@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="United Muslim Ummah - Global Islamic Community United for Peace, Progress & Prosperity"
+    />
+    <title>United Muslim Ummah</title>
+    
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#0F6A3B',
+              'primary-dark': '#22C55E',
+              gold: '#D4AF37',
+              'gold-light': '#E6C77A',
+              'gold-dark': '#FACC15',
+              sky: '#EAF3FA',
+              'sky-light': '#F5F9FC',
+              darkbg: '#0B1F17',
+              'card-dark': '#102A22',
+              'text-primary': '#1F2937',
+              'text-muted': '#6B7280',
+              'text-dark': '#E5E7EB',
+              'text-dark-muted': '#9CA3AF',
+            },
+          }
+        }
+      }
+    </script>
+
+    <style>
+      body {
+        transition: background-color 0.32s ease, color 0.32s ease;
+      }
+      
+      body.dark-mode {
+        @apply bg-darkbg text-text-dark;
+      }
+      
+      body.dark-mode header {
+        @apply bg-primary-dark;
+      }
+      
+      body.dark-mode .nav-links a {
+        @apply text-white;
+      }
+      
+      body.dark-mode .nav-links a:hover {
+        @apply text-gold-dark;
+      }
+      
+      body.dark-mode .card {
+        @apply bg-card-dark border-gray-700;
+      }
+      
+      body.dark-mode .stats-section {
+        @apply bg-card-dark;
+      }
+      
+      body.dark-mode .hero::before {
+        background: linear-gradient(180deg, rgba(11,31,23,0.6), rgba(16,42,34,0.6));
+      }
+      
+      body.dark-mode .placeholder-logo {
+        @apply bg-card-dark text-text-dark-muted border-green-900;
+      }
+      
+      body.dark-mode footer {
+        @apply bg-darkbg;
+      }
+      
+      .hero {
+        background-image: url('assets/Hero_Cover.png');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(234,243,250,0.7), rgba(255,255,255,0.18));
+        z-index: 0;
+      }
+      
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .b2b-section {
+        background-image: url('assets/b2b-pattern.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      
+      .b2b-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(15,106,59,0.86), rgba(15,106,59,0.86));
+        z-index: 0;
+      }
+      
+      .b2b-content {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 24px;
+      }
+      
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+        }
+        
+        .nav-links {
+          display: none !important;
+        }
+        
+        .nav-links.active {
+          display: flex !important;
+        }
+      }
+      
+      .counter {
+        font-size: 2.4rem;
+        font-weight: 800;
+      }
+
+      /* Language Toggle Premium Style */
+      .lang-toggle-container {
+        position: relative;
+        width: 120px;
+        height: 36px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        border: 2px solid #D4AF37;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .lang-toggle-bg {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(135deg, #D4AF37, #E6C77A);
+        border-radius: 18px;
+        left: 0;
+        top: 0;
+        transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      }
+
+      .lang-toggle-container.en .lang-toggle-bg {
+        left: 50%;
+      }
+
+      .lang-toggle-track {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .lang-option {
+        flex: 1;
+        text-align: center;
+        font-weight: 700;
+        font-size: 11px;
+        cursor: pointer;
+        user-select: none;
+        transition: color 0.3s ease;
+        color: rgba(255,255,255,0.5);
+      }
+
+      .lang-option.active {
+        color: #0F6A3B;
+        font-weight: 900;
+      }
+
+      body.dark-mode .lang-toggle-container {
+        border-color: #FACC15;
+        background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      }
+
+      body.dark-mode .lang-toggle-bg {
+        background: linear-gradient(135deg, #FACC15, #E6C77A);
+        box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2);
+      }
+
+      body.dark-mode .lang-option.active {
+        color: #0B1F17;
+      }
+    </style>
+  </head>
+  
+  <body class="bg-sky text-text-primary">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-primary text-white shadow-md transition-colors">
+      <div class="flex items-center justify-between h-20 px-5 max-w-7xl mx-auto">
+        <!-- Logo -->
+        <div class="flex gap-3 items-center">
+          <img src="./assets/logo.png" alt="UMU Logo" width="40" height="40" class="rounded-full" />
+          <div class="flex flex-col leading-tight">
+            <span class="font-black text-white text-lg">United Muslim Ummah</span>
+            <span class="text-xs font-semibold text-gold">Global Islamic Community</span>
+          </div>
+        </div>
+        
+        <!-- Hamburger -->
+        <div class="hamburger text-white" id="hamburger">☰</div>
+        
+        <!-- Nav Links -->
+        <ul class="nav-links hidden md:flex gap-5 list-none items-center absolute md:static top-20 left-0 w-full md:w-auto flex-col md:flex-row bg-primary md:bg-transparent p-5 md:p-0 shadow-md md:shadow-none" id="nav-links">
+          <li><a href="#home" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">Home</a></li>
+          <li><a href="#about" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">About Us</a></li>
+          <li><a href="#mission" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">Our Mission</a></li>
+          <li><a href="#initiatives" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">Initiatives</a></li>
+          <li><a href="#community" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">Community</a></li>
+          <li><a href="#contact" class="text-white font-semibold text-sm hover:text-gold transition-colors border-b-2 border-transparent hover:border-gold pb-1">Contact</a></li>
+          <li>
+            <div class="lang-toggle-container">
+              <div class="lang-toggle-bg"></div>
+              <div class="lang-toggle-track">
+                <span class="lang-option lang-bn active" data-lang="bn">বাংলা</span>
+                <span class="lang-option lang-en" data-lang="en">EN</span>
+              </div>
+            </div>
+          </li>
+          <li id="dark-mode-toggle" class="cursor-pointer text-lg" aria-label="Toggle Dark Mode" role="button" tabindex="0">🌙</li>
+          <li><a href="#" class="bg-white text-primary px-5 py-2 rounded font-semibold text-sm hover:border-2 hover:border-gold transition-all data-join">Join Now</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero py-28 md:py-40 text-center text-white">
+      <div class="hero-content container mx-auto max-w-5xl px-4 md:px-8">
+        <img src="./assets/logo.png" alt="UMU Logo" width="150" height="150" class="rounded-full mx-auto mb-8 border-4 border-white" />
+        
+        <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+          <span class="block text-gold">United Muslim Ummah</span>
+          <!-- <span class="block text-gold">Global Islamic Community</span> -->
+        </h1>
+        
+        <h2 class="text-lg md:text-2xl font-light text-gray-100 mb-8">United for Peace, Progress & Prosperity</h2>
+        
+        <div class="flex gap-2 justify-center items-center text-gold opacity-95 mb-12 flex-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Global Islamic Initiative</span>
+          <span class="mx-2">|</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Worldwide Presence</span>
+        </div>
+        
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a href="#about" class="bg-primary text-white px-8 py-3 rounded font-bold hover:shadow-lg hover:border-2 hover:border-gold transition-all">Learn More</a>
+          <a href="#community" class="bg-primary text-white px-8 py-3 rounded font-bold hover:shadow-lg hover:border-2 hover:border-gold transition-all">Join Community</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <div class="container mx-auto max-w-5xl px-4 md:px-8 -mt-12 md:-mt-16 relative z-10">
+      <div class="stats-section bg-white rounded-lg shadow-lg p-8 md:p-10 grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+        <div class="stat-item text-center">
+          <h3 class="counter text-primary font-black" data-target="1900">0</h3>
+          <p class="text-text-muted text-sm uppercase tracking-wider">Million Muslims</p>
+        </div>
+        <div class="stat-item text-center">
+          <h3 class="counter text-primary font-black" data-target="60">0</h3>
+          <p class="text-text-muted text-sm uppercase tracking-wider">Member Countries</p>
+        </div>
+        <div class="stat-item text-center">
+          <h3 class="counter text-primary font-black" data-target="100">0</h3>
+          <p class="text-text-muted text-sm uppercase tracking-wider">Percent United</p>
+        </div>
+        <div class="stat-item text-center">
+          <h3 class="counter text-primary font-black" data-target="50">0</h3>
+          <p class="text-text-muted text-sm uppercase tracking-wider">Peace Initiatives</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-28">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <h2 class="text-3xl md:text-4xl font-black text-primary text-center mb-4">About United Muslim Ummah</h2>
+        <p class="text-text-muted text-center max-w-2xl mx-auto mb-12">Uniting the global Muslim community for shared prosperity and peace</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h3 class="text-2xl font-black text-primary mb-6">A Global Movement for Unity and Progress</h3>
+            <p class="text-text-muted mb-4">United Muslim Ummah is a comprehensive platform dedicated to bringing together the world's 1.9 billion Muslims in pursuit of shared values, mutual understanding, and collective progress. We believe that the strength of our Ummah lies in our unity, guided by Islamic principles of peace, justice, and compassion.</p>
+            <p class="text-text-muted mb-4">Our organization bridges communities across continents, fostering dialogue and cooperation among Muslim nations and diaspora communities. Through various initiatives, we address critical issues including education, healthcare, poverty alleviation, interfaith harmony, and sustainable development.</p>
+            <p class="text-text-muted">By connecting cultural traditions with modern innovation, United Muslim Ummah creates opportunities for spiritual growth, economic development, and positive social impact. We are committed to ensuring that the voice of the global Muslim community is heard and respected worldwide.</p>
+          </div>
+          
+          <div class="card bg-sky-light p-8 rounded-lg shadow-md border-l-4 border-gold">
+            <h4 class="text-2xl font-black text-primary mb-6">Our Focus Areas</h4>
+            <ul class="list-none space-y-4">
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Education & Scholarships</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Healthcare & Wellness</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Economic Empowerment</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Interfaith Dialogue</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Sustainable Development</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-gold text-xl">✓</span>
+                <span>Peace & Justice Advocacy</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-20 md:py-28 bg-sky-light">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <h2 class="text-3xl md:text-4xl font-black text-primary text-center mb-4">Our Mission & Vision</h2>
+        <p class="text-text-muted text-center max-w-2xl mx-auto mb-12">Guiding principles that drive our work</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h3 class="text-xl font-black text-primary mb-4">Mission</h3>
+            <p class="text-text-muted">To unite Muslims globally in pursuing shared humanitarian goals while respecting diverse cultures and traditions. We work to foster understanding, promote sustainable development, and strengthen the voice of the Muslim community in international affairs.</p>
+          </div>
+
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h3 class="text-xl font-black text-primary mb-4">Vision</h3>
+            <p class="text-text-muted">A world where Muslims live with dignity, security, and prosperity; where our contributions to science, culture, and society are recognized and valued; and where the principles of justice, compassion, and peace guide our collective actions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Initiatives Section -->
+    <section id="initiatives" class="py-20 md:py-28">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <h2 class="text-3xl md:text-4xl font-black text-primary text-center mb-4">Our Initiatives</h2>
+        <p class="text-text-muted text-center max-w-2xl mx-auto mb-12">Transforming communities through action and innovation</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82M12 3L1 9l11 6.18L23 9 12 3M5 7.18L12 11.4l7-4.22L12 3 5 7.18Z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Education & Empowerment</h4>
+            <p class="text-sm text-text-muted">Scholarships & knowledge sharing</p>
+          </div>
+
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.16-2.66c-.44-.53-1.25-.58-1.78-.15-.53.44-.58 1.25-.15 1.78l3 3.68c.25.31.61.5.99.5.38 0 .74-.19.99-.5l3.93-4.85c.44-.53.39-1.34-.15-1.78-.53-.44-1.34-.39-1.78.15z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Healthcare Programs</h4>
+            <p class="text-sm text-text-muted">Medical aid & wellness</p>
+          </div>
+
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.85v-1.93c-1.3-.98-2.47-2.45-2.56-4.38h2.26c.06 1.34.23 2.36 1.52 2.36 1.02 0 1.29-.82 1.29-1.63 0-1.07-.58-1.51-1.53-2.02-1.42-.9-2.41-1.61-2.41-3.2 0-1.5 1.53-2.49 2.86-2.49.82 0 1.48.18 2.02.49v1.84h-2.3c-.09-.98-.69-1.38-1.34-1.38-.52 0-1.04.34-1.04.88 0 .58.26 1.12 1.51 1.82 1.76 1.08 2.93 1.64 2.93 3.12 0 1.8-1.12 2.65-2.39 2.65-1.02 0-1.89-.37-2.37-1.13z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Economic Empowerment</h4>
+            <p class="text-sm text-text-muted">Business & opportunity</p>
+          </div>
+
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm13 5H6v-2h13v2zm0-4H6V8h13v2z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Interfaith Dialogue</h4>
+            <p class="text-sm text-text-muted">Building bridges & understanding</p>
+          </div>
+
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Environmental Action</h4>
+            <p class="text-sm text-text-muted">Sustainability & conservation</p>
+          </div>
+
+          <div class="card bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+            <svg class="w-12 h-12 text-primary mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+            <h4 class="text-lg font-bold text-primary mb-2">Peace Advocacy</h4>
+            <p class="text-sm text-text-muted">Conflict resolution & justice</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="b2b-section py-20 md:py-28 text-white">
+      <div class="b2b-content container mx-auto max-w-5xl px-4 md:px-8">
+        <div class="bg-white bg-opacity-5 backdrop-blur-sm border border-white border-opacity-10 p-8 md:p-12 rounded-2xl">
+          <h2 class="text-3xl md:text-4xl font-black text-white text-center mb-6">Join Our Global Community</h2>
+          <p class="text-center max-w-2xl mx-auto mb-8 text-gray-100">Be part of a movement that connects millions of Muslims worldwide. Together, we can create lasting change and build a better future for all.</p>
+
+          <div class="text-center mb-12">
+            <a href="#" class="bg-primary text-white px-10 py-3 rounded-lg font-bold hover:shadow-lg hover:border-2 hover:border-gold transition-all inline-block">Become a Member</a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-opacity-10 bg-gold border border-gold border-opacity-20 p-6 rounded-lg">
+              <strong class="block text-2xl text-gold mb-2">1.9B+</strong>
+              <span>Community Members</span>
+            </div>
+            <div class="bg-opacity-10 bg-gold border border-gold border-opacity-20 p-6 rounded-lg">
+              <strong class="block text-2xl text-gold mb-2">60+</strong>
+              <span>Member Countries</span>
+            </div>
+            <div class="bg-opacity-10 bg-gold border border-gold border-opacity-20 p-6 rounded-lg">
+              <strong class="block text-2xl text-gold mb-2">Always</strong>
+              <span>Growing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Join -->
+    <section class="py-20 md:py-28">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <h2 class="text-3xl md:text-4xl font-black text-primary text-center mb-4">Why Join United Muslim Ummah?</h2>
+        <p class="text-text-muted text-center max-w-2xl mx-auto mb-12">Discover the benefits of being part of our global movement</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200 flex gap-6">
+            <span class="text-4xl font-black text-gold opacity-20">01</span>
+            <div>
+              <h4 class="text-lg font-bold text-primary mb-2">Global Network</h4>
+              <p class="text-text-muted">Connect with millions of Muslims across the world.</p>
+            </div>
+          </div>
+          
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200 flex gap-6">
+            <span class="text-4xl font-black text-gold opacity-20">02</span>
+            <div>
+              <h4 class="text-lg font-bold text-primary mb-2">Shared Values</h4>
+              <p class="text-text-muted">United by Islamic principles of peace and justice.</p>
+            </div>
+          </div>
+          
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200 flex gap-6">
+            <span class="text-4xl font-black text-gold opacity-20">03</span>
+            <div>
+              <h4 class="text-lg font-bold text-primary mb-2">Real Impact</h4>
+              <p class="text-text-muted">Contribute to meaningful change in education, health, and society.</p>
+            </div>
+          </div>
+          
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200 flex gap-6">
+            <span class="text-4xl font-black text-gold opacity-20">04</span>
+            <div>
+              <h4 class="text-lg font-bold text-primary mb-2">Cultural Pride</h4>
+              <p class="text-text-muted">Celebrate and preserve our rich Islamic heritage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="py-20 md:py-28 bg-sky-light">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <h2 class="text-3xl md:text-4xl font-black text-primary text-center mb-4">Partner Organizations</h2>
+        <p class="text-text-muted text-center max-w-2xl mx-auto mb-12">Working together with leading Islamic and humanitarian organizations</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h4 class="text-lg font-bold text-primary mb-4">Islamic Education</h4>
+            <p class="font-bold text-primary text-lg">Al-Azhar University</p>
+            <p class="text-sm text-text-muted mt-4">Leading Islamic educational partnership</p>
+          </div>
+          
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h4 class="text-lg font-bold text-primary mb-4">International Relations</h4>
+            <p class="font-bold text-primary text-lg">OIC Member States</p>
+            <p class="text-sm text-text-muted mt-4">Organization of Islamic Cooperation partnerships</p>
+          </div>
+          
+          <div class="card bg-white p-8 rounded-lg shadow-md border border-gray-200">
+            <h4 class="text-lg font-bold text-primary mb-4">Humanitarian Work</h4>
+            <p class="font-bold text-primary text-lg">International NGOs</p>
+            <p class="text-sm text-text-muted mt-4">Global humanitarian and development partners</p>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-black text-primary text-center mb-8">Featured Partners</h3>
+        
+        <div class="flex justify-center gap-6 flex-wrap mb-8">
+          <div class="placeholder-logo w-36 h-20 bg-gray-200 rounded border border-gray-300 flex items-center justify-center text-gray-500 font-bold">Partner 1</div>
+          <div class="placeholder-logo w-36 h-20 bg-gray-200 rounded border border-gray-300 flex items-center justify-center text-gray-500 font-bold">Partner 2</div>
+          <div class="placeholder-logo w-36 h-20 bg-gray-200 rounded border border-gray-300 flex items-center justify-center text-gray-500 font-bold">Partner 3</div>
+          <div class="placeholder-logo w-36 h-20 bg-gray-200 rounded border border-gray-300 flex items-center justify-center text-gray-500 font-bold">Partner 4</div>
+        </div>
+        
+        <div class="text-center">
+          <a href="#" class="border-2 border-primary text-primary px-10 py-3 rounded-lg font-bold hover:bg-primary hover:text-white transition-all inline-block">Become a Partner</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-primary text-white py-16 md:py-20">
+      <div class="container mx-auto max-w-5xl px-4 md:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+          <div class="footer-col">
+            <h4 class="text-gold font-bold text-lg mb-4">Contact Us</h4>
+            <p class="text-sm mb-4">
+              <strong>Global Headquarters:</strong><br />
+              International Islamic Center<br />
+              Dubai, UAE
+            </p>
+            <p class="text-sm mb-4">
+              <strong>Regional Offices:</strong> Asia, Africa, Europe, Americas
+            </p>
+            <p class="text-sm mb-2"><strong>Email:</strong> info@ummaah.org</p>
+            <p class="text-sm"><strong>Phone:</strong> +971 (0) 4 XXX XXXX</p>
+          </div>
+          
+          <div class="footer-col">
+            <h4 class="text-gold font-bold text-lg mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li><a href="#home" class="text-white hover:text-gold transition-colors">Home</a></li>
+              <li><a href="#about" class="text-white hover:text-gold transition-colors">About Us</a></li>
+              <li><a href="#mission" class="text-white hover:text-gold transition-colors">Our Mission</a></li>
+              <li><a href="#initiatives" class="text-white hover:text-gold transition-colors">Initiatives</a></li>
+              <li><a href="#community" class="text-white hover:text-gold transition-colors">Community</a></li>
+              <li><a href="#contact" class="text-white hover:text-gold transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-col">
+            <h4 class="text-gold font-bold text-lg mb-4">Follow Us</h4>
+            <ul class="space-y-2">
+              <li><a href="#" class="text-white hover:text-gold transition-colors">Facebook</a></li>
+              <li><a href="#" class="text-white hover:text-gold transition-colors">Twitter</a></li>
+              <li><a href="#" class="text-white hover:text-gold transition-colors">Instagram</a></li>
+              <li><a href="#" class="text-white hover:text-gold transition-colors">YouTube</a></li>
+              <li><a href="#" class="text-white hover:text-gold transition-colors">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="border-t border-white border-opacity-10 pt-6 text-center text-sm text-gray-300">
+          &copy; 2026 United Muslim Ummah. All rights reserved. | <a href="#" class="hover:text-gold">Privacy Policy</a> | <a href="#" class="hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>

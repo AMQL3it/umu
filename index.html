@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="United Muslim Ummah - Global Islamic Community United for Peace, Progress & Prosperity"
+    />
+    <title>United Muslim Ummah</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0F6A3B",
+              "primary-dark": "#0B4F2B",
+              gold: "#B28800",
+              "gold-light": "#E6C77A",
+              "gold-dark": "#B5952F",
+              sky: "#EAF3FA",
+              "sky-light": "#F5F9FC",
+              "text-primary": "#1F2937",
+              "text-muted": "#6B7280",
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-out",
+              "slide-up": "slideUp 0.5s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Base Styles */
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        scroll-behavior: smooth;
+        background-color: #f5f9fc;
+      }
+
+      /* Navigation Active State */
+      .nav-link.active {
+        color: #d4af37;
+        font-weight: 700;
+      }
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #d4af37;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section Background */
+      .hero {
+        background-image: url("assets/Hero_Cover.png");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* Changed from green gradient to subtle gray overlay for white image */
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Page Visibility Logic */
+      .page-section {
+        display: none;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      .page-section.active-section {
+        display: block;
+      }
+
+      /* Modal Styles */
+      .modal {
+        transition: opacity 0.3s ease;
+      }
+      .modal.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .modal:not(.hidden) {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Horizontal Scroll Snap / Carousel */
+      .snap-x {
+        scroll-snap-type: x mandatory;
+      }
+      .snap-center {
+        scroll-snap-align: center;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Mobile Menu */
+      @media (max-width: 768px) {
+        .nav-menu {
+          display: none;
+        }
+        .nav-menu.open {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="text-text-primary antialiased">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-primary shadow-lg">
+      <div
+        class="container mx-auto px-4 md:px-8 h-20 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <div
+          class="flex items-center gap-3 cursor-pointer"
+          onclick="router('home')"
+        >
+          <img
+            src="./assets/logo.png"
+            alt="UMU Logo"
+            class="w-10 h-10 rounded-full border-2 border-gold object-cover"
+            onerror="this.src='https://placehold.co/40x40?text=UMU'"
+          />
+          <div class="flex flex-col leading-none">
+            <span class="font-black text-white text-lg tracking-wide"
+              >United Muslim Ummah</span
+            >
+            <span
+              class="text-[10px] font-bold text-gold uppercase tracking-wider"
+              >Global Islamic Community</span
+            >
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a
+            href="#"
+            onclick="handleNavClick('home')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors active"
+            data-page="home"
+            >Home</a
+          >
+          <a
+            href="#mission-section"
+            onclick="handleNavClick('mission-section')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
+            >Our Mission</a
+          >
+          <a
+            href="#"
+            onclick="handleNavClick('events')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
+            data-page="events"
+            >Events</a
+          >
+          <a
+            href="#"
+            onclick="handleNavClick('news')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
+            data-page="news"
+            >News Portal</a
+          >
+          <a
+            href="#"
+            onclick="handleNavClick('gallery')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
+            data-page="gallery"
+            >Gallery</a
+          >
+          <a
+            href="#contact-section"
+            onclick="handleNavClick('contact-section')"
+            class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
+            >Contact us</a
+          >
+        </nav>
+
+        <!-- Login / Join Button -->
+        <div class="hidden md:block">
+          <button
+            class="bg-gold text-primary-dark px-6 py-2 rounded-full font-bold text-sm hover:bg-white hover:text-primary transition-all shadow-md transform hover:-translate-y-0.5"
+          >
+            Join / Login
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button
+          id="hamburger"
+          class="md:hidden text-white text-2xl focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div
+        id="mobile-menu"
+        class="nav-menu hidden flex-col absolute top-20 left-0 w-full bg-primary border-t border-primary-dark shadow-xl md:hidden"
+      >
+        <a
+          href="#"
+          onclick="handleNavClick('home')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >Home</a
+        >
+        <a
+          href="#mission-section"
+          onclick="handleNavClick('mission-section')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >Our Mission</a
+        >
+        <a
+          href="#"
+          onclick="handleNavClick('events')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >Events</a
+        >
+        <a
+          href="#"
+          onclick="handleNavClick('news')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >News Portal</a
+        >
+        <a
+          href="#"
+          onclick="handleNavClick('gallery')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >Gallery</a
+        >
+        <a
+          href="#contact-section"
+          onclick="handleNavClick('contact-section')"
+          class="p-4 text-white font-semibold border-b border-primary-dark hover:bg-primary-dark"
+          >Contact us</a
+        >
+        <div class="p-4">
+          <button
+            class="w-full bg-gold text-primary-dark px-6 py-3 rounded font-bold hover:bg-white transition-all"
+          >
+            Join / Login
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content" class="min-h-screen">
+      <!-- ==================== HOME PAGE ==================== -->
+      <section id="home" class="page-section active-section">
+        <!-- Hero -->
+        <div class="hero py-32 md:py-48 text-center text-primary">
+          <div class="hero-content container mx-auto px-4">
+            <img
+              src="./assets/logo.png"
+              alt="UMU Logo"
+              class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-8 border-4 border-primary/20 shadow-2xl object-cover"
+              onerror="this.src='https://placehold.co/150x150?text=Logo'"
+            />
+            <h1
+              class="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-sm"
+            >
+              United Muslim Ummah
+              <span class="block text-gold text-2xl md:text-3xl mt-4 font-bold"
+                >Global Islamic Community</span
+              >
+            </h1>
+            <p
+              class="text-lg md:text-xl font-medium text-gray-700 mb-10 max-w-2xl mx-auto opacity-90"
+            >
+              United for Peace, Progress & Prosperity. Connecting hearts and
+              minds across the globe.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+              <button
+                onclick="document.getElementById('mission-section').scrollIntoView({behavior: 'smooth'})"
+                class="bg-gold text-primary-dark px-8 py-3 rounded-lg font-bold hover:bg-white transition-all shadow-lg"
+              >
+                Our Mission
+              </button>
+              <button
+                onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})"
+                class="border-2 border-primary text-primary px-8 py-3 rounded-lg font-bold hover:bg-primary hover:text-white transition-all"
+              >
+                Join Community
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="container mx-auto px-4 -mt-16 relative z-10 mb-20">
+          <div
+            class="bg-white rounded-xl shadow-xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            <div class="text-center">
+              <h3
+                class="counter text-3xl md:text-4xl font-black text-primary"
+                data-target="1900"
+              >
+                0
+              </h3>
+              <p
+                class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mt-1"
+              >
+                Million Muslims
+              </p>
+            </div>
+            <div class="text-center">
+              <h3
+                class="counter text-3xl md:text-4xl font-black text-primary"
+                data-target="60"
+              >
+                0
+              </h3>
+              <p
+                class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mt-1"
+              >
+                Member Countries
+              </p>
+            </div>
+            <div class="text-center">
+              <h3
+                class="counter text-3xl md:text-4xl font-black text-primary"
+                data-target="100"
+              >
+                0
+              </h3>
+              <p
+                class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mt-1"
+              >
+                Percent United
+              </p>
+            </div>
+            <div class="text-center">
+              <h3
+                class="counter text-3xl md:text-4xl font-black text-primary"
+                data-target="50"
+              >
+                0
+              </h3>
+              <p
+                class="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mt-1"
+              >
+                Peace Initiatives
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motto Section -->
+        <div class="text-center container mx-auto px-4 max-w-3xl mb-24">
+          <span class="text-gold font-bold uppercase tracking-widest text-sm"
+            >Our Motto</span
+          >
+          <h2 class="text-3xl md:text-5xl font-black text-primary mt-3 mb-6">
+            "One Ummah, One Heart, One Future"
+          </h2>
+          <div class="h-1 w-24 bg-gold mx-auto rounded-full"></div>
+          <p class="text-gray-600 mt-6 text-lg">
+            Standing together in solidarity, working together for prosperity,
+            and building a legacy of peace for generations to come.
+          </p>
+        </div>
+
+        <!-- Mission Section (Moved to Home) -->
+        <div id="mission-section" class="bg-sky-light py-20 scroll-mt-24">
+          <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl md:text-4xl font-black text-primary">
+                Our Mission & Vision
+              </h2>
+              <p class="text-gray-500 mt-2">
+                The guiding principles of our movement
+              </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+              <div
+                class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              >
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mb-6"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary-dark"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-primary mb-4">
+                  Our Mission
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                  To unite Muslims globally in pursuing shared humanitarian
+                  goals while respecting diverse cultures and traditions. We
+                  work to foster understanding, promote sustainable development,
+                  and strengthen the voice of the Muslim community in
+                  international affairs.
+                </p>
+              </div>
+              <div
+                class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              >
+                <div
+                  class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mb-6"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary-dark"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-primary mb-4">Our Vision</h2>
+                <p class="text-gray-600 leading-relaxed">
+                  A world where Muslims live with dignity, security, and
+                  prosperity; where our contributions to science, culture, and
+                  society are recognized and valued; and where the principles of
+                  justice, compassion, and peace guide our collective actions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Event Section -->
+        <div class="container mx-auto px-4 py-24 max-w-6xl">
+          <div class="flex items-end justify-between mb-8">
+            <div>
+              <h2 class="text-3xl font-black text-primary">Latest Event</h2>
+              <p class="text-gray-500 mt-1">Join our next big gathering</p>
+            </div>
+            <button
+              onclick="router('events')"
+              class="text-primary font-bold hover:text-gold transition-colors text-sm"
+            >
+              View All Events →
+            </button>
+          </div>
+
+          <div
+            id="home-latest-event"
+            class="bg-primary rounded-3xl text-white overflow-hidden shadow-2xl flex flex-col md:flex-row"
+          >
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Gallery Carousel Section -->
+        <div class="bg-gray-50 py-24">
+          <div class="container mx-auto px-4">
+            <div
+              class="flex items-center justify-between mb-8 max-w-7xl mx-auto"
+            >
+              <h2 class="text-3xl font-black text-primary">Moments of Unity</h2>
+              <button
+                onclick="router('gallery')"
+                class="text-primary font-bold hover:text-gold transition-colors text-sm"
+              >
+                View All Photos →
+              </button>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto">
+              <!-- Carousel Container -->
+              <div
+                id="gallery-carousel"
+                class="flex gap-4 overflow-x-auto snap-x scrollbar-hide pb-4"
+              >
+                <!-- JS Injected Images -->
+              </div>
+              <!-- Controls -->
+              <button
+                onclick="scrollCarousel('gallery-carousel', -300)"
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow-lg hover:bg-white text-primary z-10"
+              >
+                ←
+              </button>
+              <button
+                onclick="scrollCarousel('gallery-carousel', 300)"
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 p-3 rounded-full shadow-lg hover:bg-white text-primary z-10"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- News Carousel Section -->
+        <div class="py-24">
+          <div class="container mx-auto px-4">
+            <div
+              class="flex items-center justify-between mb-8 max-w-7xl mx-auto"
+            >
+              <h2 class="text-3xl font-black text-primary">News & Updates</h2>
+              <button
+                onclick="router('news')"
+                class="text-primary font-bold hover:text-gold transition-colors text-sm"
+              >
+                Read All News →
+              </button>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto">
+              <div
+                id="news-carousel"
+                class="flex gap-6 overflow-x-auto snap-x scrollbar-hide pb-4"
+              >
+                <!-- JS Injected News Cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section (Moved to Home) -->
+        <div
+          id="contact-section"
+          class="bg-primary text-white py-24 scroll-mt-24"
+        >
+          <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-black text-center mb-12">Get in Touch</h2>
+            <div
+              class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row text-gray-800"
+            >
+              <div class="bg-gray-100 p-10 md:w-2/5">
+                <div class="space-y-8">
+                  <div class="flex items-start gap-4">
+                    <span class="text-2xl">📍</span>
+                    <div>
+                      <h4 class="font-bold text-primary">Headquarters</h4>
+                      <p class="text-sm text-gray-600">
+                        International Islamic Center<br />Dubai, UAE
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4">
+                    <span class="text-2xl">📧</span>
+                    <div>
+                      <h4 class="font-bold text-primary">Email</h4>
+                      <p class="text-sm text-gray-600">info@ummaah.org</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4">
+                    <span class="text-2xl">📞</span>
+                    <div>
+                      <h4 class="font-bold text-primary">Phone</h4>
+                      <p class="text-sm text-gray-600">+971 (0) 4 123 4567</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-10 md:w-3/5">
+                <form
+                  onsubmit="event.preventDefault(); alert('Thank you for your message!');"
+                  class="space-y-6"
+                >
+                  <div>
+                    <label
+                      class="block text-xs font-bold uppercase text-gray-500 mb-2"
+                      >Full Name</label
+                    >
+                    <input
+                      type="text"
+                      class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-gray-50"
+                      placeholder="Brother/Sister Name"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold uppercase text-gray-500 mb-2"
+                      >Email Address</label
+                    >
+                    <input
+                      type="email"
+                      class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-gray-50"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold uppercase text-gray-500 mb-2"
+                      >Message</label
+                    >
+                    <textarea
+                      rows="3"
+                      class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-gray-50"
+                      placeholder="How can we help?"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-primary-dark transition-all shadow-lg"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== EVENTS PAGE ==================== -->
+      <section id="events" class="page-section">
+        <div class="bg-primary py-12 text-white text-center">
+          <h1 class="text-4xl font-bold">All Community Events</h1>
+          <p class="opacity-80 mt-2">
+            Join us in our upcoming gatherings and look back at our journey
+          </p>
+        </div>
+
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+          <!-- Tabs -->
+          <div class="flex flex-wrap justify-center gap-2 mb-10">
+            <button
+              class="event-tab active px-6 py-2 rounded-full font-semibold text-sm transition-all bg-primary text-white"
+              onclick="filterEvents('all', this)"
+            >
+              All Events
+            </button>
+            <button
+              class="event-tab px-6 py-2 rounded-full font-semibold text-sm transition-all bg-gray-200 text-gray-600 hover:bg-gray-300"
+              onclick="filterEvents('upcoming', this)"
+            >
+              Upcoming
+            </button>
+            <button
+              class="event-tab px-6 py-2 rounded-full font-semibold text-sm transition-all bg-gray-200 text-gray-600 hover:bg-gray-300"
+              onclick="filterEvents('ongoing', this)"
+            >
+              Ongoing
+            </button>
+            <button
+              class="event-tab px-6 py-2 rounded-full font-semibold text-sm transition-all bg-gray-200 text-gray-600 hover:bg-gray-300"
+              onclick="filterEvents('previous', this)"
+            >
+              Previous
+            </button>
+          </div>
+
+          <!-- Events Grid -->
+          <div
+            id="events-grid"
+            class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          >
+            <!-- Javascript will populate this -->
+          </div>
+
+          <!-- Events Pagination -->
+          <div id="events-pagination" class="flex justify-center gap-2"></div>
+        </div>
+      </section>
+
+      <!-- ==================== NEWS PORTAL PAGE ==================== -->
+      <section id="news" class="page-section">
+        <div class="bg-gray-100 py-12 text-center border-b border-gray-200">
+          <h1 class="text-4xl font-black text-primary">News Portal</h1>
+          <p class="text-gray-500 mt-2">Latest updates from the Ummah</p>
+        </div>
+
+        <div class="container mx-auto px-4 py-12 max-w-6xl">
+          <!-- News Grid -->
+          <div
+            id="news-grid"
+            class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          >
+            <!-- Javascript will populate this -->
+          </div>
+          <!-- News Pagination -->
+          <div id="news-pagination" class="flex justify-center gap-2"></div>
+        </div>
+      </section>
+
+      <!-- ==================== GALLERY PAGE ==================== -->
+      <section id="gallery" class="page-section">
+        <div class="bg-primary py-12 text-white text-center">
+          <h1 class="text-4xl font-bold">Gallery</h1>
+          <p class="opacity-80 mt-2">Moments captured from around the world</p>
+        </div>
+        <div class="container mx-auto px-4 py-12 max-w-7xl">
+          <div
+            id="gallery-grid"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] mb-12"
+          >
+            <!-- JS populated -->
+          </div>
+          <!-- Gallery Pagination -->
+          <div id="gallery-pagination" class="flex justify-center gap-2"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12 border-t border-white/10">
+      <div class="container mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-2 mb-6">
+          <img
+            src="./assets/logo.png"
+            alt="Logo"
+            class="w-10 h-10 rounded-full"
+            onerror="this.src='https://placehold.co/40x40/transparent/white?text=U'"
+          />
+          <span class="font-bold text-xl">United Muslim Ummah</span>
+        </div>
+        <div class="flex justify-center gap-6 mb-8 text-sm opacity-80">
+          <a
+            href="#"
+            onclick="router('home')"
+            class="hover:text-gold transition-colors"
+            >Home</a
+          >
+          <a
+            href="#"
+            onclick="router('events')"
+            class="hover:text-gold transition-colors"
+            >Events</a
+          >
+          <a
+            href="#"
+            onclick="router('contact')"
+            class="hover:text-gold transition-colors"
+            >Contact</a
+          >
+        </div>
+        <p class="text-sm opacity-50">
+          &copy; 2026 United Muslim Ummah. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- SHARED MODAL OVERLAY -->
+    <div
+      id="content-modal"
+      class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4"
+    >
+      <div
+        class="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onclick="closeModal()"
+      ></div>
+      <div
+        class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl animate-slide-up flex flex-col"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 bg-white/90 w-10 h-10 rounded-full flex items-center justify-center hover:bg-white transition-colors text-primary font-bold text-xl shadow-md z-20"
+        >
+          &times;
+        </button>
+        <div class="relative h-64 md:h-80 flex-shrink-0">
+          <img
+            id="modal-img"
+            src=""
+            class="w-full h-full object-cover"
+            alt="Header"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+          ></div>
+          <div class="absolute bottom-6 left-8 right-8">
+            <span
+              id="modal-tag"
+              class="bg-gold text-primary-dark px-3 py-1 rounded text-xs font-bold uppercase tracking-wide inline-block mb-2"
+            ></span>
+            <h2
+              id="modal-title"
+              class="text-2xl md:text-4xl font-black text-white leading-tight shadow-black drop-shadow-md"
+            ></h2>
+          </div>
+        </div>
+        <div class="p-8 md:p-10">
+          <div
+            class="flex items-center gap-4 text-sm text-gray-500 mb-6 border-b border-gray-100 pb-6"
+          >
+            <span id="modal-date"></span>
+            <span id="modal-location" class="hidden"></span>
+          </div>
+          <div
+            id="modal-content"
+            class="prose max-w-none text-gray-700 leading-relaxed text-lg"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+      // ================= DATA GENERATION =================
+      const generateItems = (count, type) => {
+        return Array.from({ length: count }, (_, i) => ({
+          id: i + 1,
+          title: `${type} Title ${i + 1}: Global Initiative`,
+          date: new Date(2026, i % 12, ((i * 3) % 28) + 1).toLocaleDateString(
+            "en-US",
+            { month: "short", day: "numeric", year: "numeric" }
+          ),
+          status:
+            i % 3 === 0 ? "upcoming" : i % 3 === 1 ? "ongoing" : "previous",
+          location: ["Dubai", "Istanbul", "London", "New York", "Kuala Lumpur"][
+            i % 5
+          ],
+          image: `https://placehold.co/600x400?text=${type}+${i + 1}`,
+          summary: `Summary for ${type} ${
+            i + 1
+          }. This is a brief description of the content shown in the card view.`,
+          content: `<p>This is the full detailed content for <strong>${type} ${
+            i + 1
+          }</strong>.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>`,
+        }));
+      };
+
+      const eventsData = generateItems(20, "Event");
+      // Set a specific featured event for Home
+      eventsData[0] = {
+        id: 1,
+        title: "Global Unity Summit 2026",
+        date: "Oct 25, 2026",
+        status: "upcoming",
+        location: "Istanbul, Turkey",
+        image: "https://placehold.co/800x500?text=Unity+Summit",
+        summary:
+          "Bringing together leaders from 50 nations to discuss unity, economic cooperation, and the future of the Ummah.",
+        content:
+          "<p>The Global Unity Summit 2026 represents a pivotal moment for the Muslim world. Delegates from over 50 nations will convene in Istanbul.</p><p>Key topics include:</p><ul class='list-disc pl-5 mt-2 mb-4'><li>Economic Trade Zones</li><li>Educational Standardization</li><li>Healthcare Infrastructure</li></ul><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+      };
+
+      const newsData = generateItems(25, "News");
+      const galleryData = generateItems(30, "Photo");
+
+      // ================= STATE =================
+      const state = {
+        eventsPage: 1,
+        newsPage: 1,
+        galleryPage: 1,
+        itemsPerPage: 6,
+      };
+
+      // ================= ROUTING & NAV =================
+      function handleNavClick(target) {
+        // Check if target is a section on home page
+        if (
+          target === "home" ||
+          target === "mission-section" ||
+          target === "contact-section"
+        ) {
+          router("home");
+          if (target !== "home") {
+            setTimeout(() => {
+              document
+                .getElementById(target)
+                .scrollIntoView({ behavior: "smooth" });
+            }, 100);
+          }
+        } else {
+          router(target);
+        }
+      }
+
+      function router(pageId) {
+        // Hide all sections
+        document.querySelectorAll(".page-section").forEach((section) => {
+          section.classList.remove("active-section");
+        });
+
+        // Show selected section
+        const target =
+          document.getElementById(pageId) || document.getElementById("home");
+        target.classList.add("active-section");
+
+        // Update Nav State
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.remove("active");
+          // Logic to keep "Home" active for home sections
+          const linkPage = link.getAttribute("data-page");
+          if (pageId === "home" && linkPage === "home")
+            link.classList.add("active");
+          else if (pageId !== "home" && linkPage === pageId)
+            link.classList.add("active");
+        });
+
+        // Close mobile menu
+        document.getElementById("mobile-menu").classList.remove("open");
+
+        // Scroll top only if switching major views, not internal scrolls
+        if (pageId !== "home") window.scrollTo(0, 0);
+
+        // Special Actions
+        if (pageId === "home") {
+          animateCounters();
+          renderHomeComponents();
+        }
+      }
+
+      document.getElementById("hamburger").addEventListener("click", () => {
+        document.getElementById("mobile-menu").classList.toggle("open");
+      });
+
+      // ================= COMPONENT RENDERING =================
+
+      // --- HOME PAGE COMPONENTS ---
+      function renderHomeComponents() {
+        // Latest Event
+        const latestEvent = eventsData[0];
+        const eventHTML = `
+            <div class="md:w-1/2 h-64 md:h-auto relative">
+                <img src="${latestEvent.image}" class="w-full h-full object-cover" alt="Event">
+                <div class="absolute top-4 left-4 bg-gold text-primary-dark font-bold px-3 py-1 rounded shadow-md text-sm">UPCOMING</div>
+            </div>
+            <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center text-left">
+                <div class="flex items-center gap-3 text-gold/80 font-bold text-sm mb-3">
+                    <span>📅 ${latestEvent.date}</span>
+                    <span>📍 ${latestEvent.location}</span>
+                </div>
+                <h3 class="text-3xl font-bold mb-4">${latestEvent.title}</h3>
+                <p class="text-gray-200 mb-8 leading-relaxed">${latestEvent.summary}</p>
+                <div>
+                    <button onclick="openModal('event', 1)" class="bg-white text-primary px-8 py-3 rounded-lg font-bold hover:bg-gold hover:text-primary-dark transition-all">View Details</button>
+                </div>
+            </div>
+          `;
+        document.getElementById("home-latest-event").innerHTML = eventHTML;
+
+        // Gallery Carousel (First 7)
+        const galleryContainer = document.getElementById("gallery-carousel");
+        galleryContainer.innerHTML = galleryData
+          .slice(0, 7)
+          .map(
+            (item) => `
+            <div class="flex-none w-72 h-80 relative rounded-xl overflow-hidden snap-center cursor-pointer group" onclick="router('gallery')">
+                <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-4 left-4 text-white">
+                    <p class="font-bold text-lg">${item.title}</p>
+                </div>
+            </div>
+          `
+          )
+          .join("");
+
+        // News Carousel (First 4)
+        const newsContainer = document.getElementById("news-carousel");
+        newsContainer.innerHTML = newsData
+          .slice(0, 4)
+          .map(
+            (item) => `
+            <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden snap-center cursor-pointer hover:-translate-y-1 transition-transform border border-gray-100 flex flex-col" onclick="openModal('news', ${item.id})">
+                <div class="h-48 overflow-hidden">
+                    <img src="${item.image}" class="w-full h-full object-cover" alt="News">
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="text-gold font-bold text-xs uppercase mb-2">${item.date}</span>
+                    <h4 class="font-bold text-primary text-lg mb-2 leading-tight">${item.title}</h4>
+                    <p class="text-gray-500 text-sm line-clamp-2">${item.summary}</p>
+                </div>
+            </div>
+          `
+          )
+          .join("");
+      }
+
+      function scrollCarousel(id, amount) {
+        document
+          .getElementById(id)
+          .scrollBy({ left: amount, behavior: "smooth" });
+      }
+
+      // --- PAGINATION LOGIC ---
+      function createPagination(total, limit, current, elementId, renderFn) {
+        const pages = Math.ceil(total / limit);
+        const container = document.getElementById(elementId);
+        container.innerHTML = "";
+
+        // Prev
+        const prevBtn = document.createElement("button");
+        prevBtn.innerText = "←";
+        prevBtn.className = `w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+          current === 1
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white text-primary hover:bg-gold hover:text-white shadow"
+        }`;
+        prevBtn.onclick = () => {
+          if (current > 1) renderFn(current - 1);
+        };
+        container.appendChild(prevBtn);
+
+        // Numbers (Simplified: show all if < 5, else logic)
+        // For this demo, simply showing first 3 and last or simplistic approach
+        for (let i = 1; i <= pages; i++) {
+          if (
+            i === 1 ||
+            i === pages ||
+            (i >= current - 1 && i <= current + 1)
+          ) {
+            const btn = document.createElement("button");
+            btn.innerText = i;
+            btn.className = `w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
+              i === current
+                ? "bg-primary text-white scale-110 shadow-lg"
+                : "bg-white text-gray-600 hover:bg-gray-100"
+            }`;
+            btn.onclick = () => renderFn(i);
+            container.appendChild(btn);
+          } else if (container.lastChild.innerText !== "...") {
+            const span = document.createElement("span");
+            span.innerText = "...";
+            span.className =
+              "w-10 h-10 flex items-center justify-center text-gray-400";
+            container.appendChild(span);
+          }
+        }
+
+        // Next
+        const nextBtn = document.createElement("button");
+        nextBtn.innerText = "→";
+        nextBtn.className = `w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+          current === pages
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white text-primary hover:bg-gold hover:text-white shadow"
+        }`;
+        nextBtn.onclick = () => {
+          if (current < pages) renderFn(current + 1);
+        };
+        container.appendChild(nextBtn);
+      }
+
+      // --- EVENTS PAGE ---
+      let currentEventFilter = "all";
+      function renderEvents(page = 1) {
+        state.eventsPage = page;
+        const grid = document.getElementById("events-grid");
+        grid.innerHTML = "";
+
+        const filtered =
+          currentEventFilter === "all"
+            ? eventsData
+            : eventsData.filter((e) => e.status === currentEventFilter);
+
+        // Pagination Slice
+        const start = (page - 1) * state.itemsPerPage;
+        const end = start + state.itemsPerPage;
+        const paginatedItems = filtered.slice(start, end);
+
+        if (paginatedItems.length === 0) {
+          grid.innerHTML =
+            '<div class="col-span-full text-center text-gray-500 py-10">No events found.</div>';
+          document.getElementById("events-pagination").innerHTML = "";
+          return;
+        }
+
+        paginatedItems.forEach((event) => {
+          let badgeColor = "bg-gray-500";
+          if (event.status === "upcoming")
+            badgeColor = "bg-gold text-primary-dark";
+          if (event.status === "ongoing")
+            badgeColor = "bg-green-600 text-white";
+
+          grid.innerHTML += `
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 group flex flex-col h-full">
+                      <div class="relative h-48 overflow-hidden">
+                          <img src="${event.image}" alt="${event.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                          <span class="absolute top-4 right-4 ${badgeColor} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-sm">${event.status}</span>
+                      </div>
+                      <div class="p-6 flex flex-col flex-grow">
+                          <div class="text-xs text-gray-500 font-bold mb-2 flex items-center gap-2">
+                              <span>📅 ${event.date}</span>
+                              <span>•</span>
+                              <span>📍 ${event.location}</span>
+                          </div>
+                          <h3 class="text-xl font-bold text-primary mb-3">${event.title}</h3>
+                          <p class="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">${event.summary}</p>
+                          <button onclick="openModal('event', ${event.id})" class="text-primary font-bold text-sm hover:text-gold transition-colors text-left">View Details →</button>
+                      </div>
+                  </div>
+              `;
+        });
+
+        createPagination(
+          filtered.length,
+          state.itemsPerPage,
+          page,
+          "events-pagination",
+          renderEvents
+        );
+      }
+
+      function filterEvents(type, btn) {
+        currentEventFilter = type;
+        // UI Update
+        document.querySelectorAll(".event-tab").forEach((t) => {
+          t.classList.remove("bg-primary", "text-white");
+          t.classList.add("bg-gray-200", "text-gray-600");
+        });
+        btn.classList.remove("bg-gray-200", "text-gray-600");
+        btn.classList.add("bg-primary", "text-white");
+        renderEvents(1);
+      }
+
+      // --- NEWS PAGE ---
+      function renderNews(page = 1) {
+        state.newsPage = page;
+        const grid = document.getElementById("news-grid");
+        grid.innerHTML = "";
+
+        const start = (page - 1) * state.itemsPerPage;
+        const paginated = newsData.slice(start, start + state.itemsPerPage);
+
+        paginated.forEach((news) => {
+          grid.innerHTML += `
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-pointer h-full flex flex-col" onclick="openModal('news', ${news.id})">
+                      <img src="${news.image}" class="w-full h-48 object-cover" alt="${news.title}">
+                      <div class="p-6 flex flex-col flex-grow">
+                          <span class="text-gold font-bold text-xs uppercase mb-2">${news.date}</span>
+                          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">${news.title}</h3>
+                          <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">${news.summary}</p>
+                          <span class="text-primary font-bold text-sm mt-auto">Read Full Story →</span>
+                      </div>
+                  </div>
+              `;
+        });
+        createPagination(
+          newsData.length,
+          state.itemsPerPage,
+          page,
+          "news-pagination",
+          renderNews
+        );
+      }
+
+      // --- GALLERY PAGE ---
+      function renderGallery(page = 1) {
+        state.galleryPage = page;
+        const grid = document.getElementById("gallery-grid");
+        grid.innerHTML = "";
+
+        const itemsPerPage = 12; // More items for gallery
+        const start = (page - 1) * itemsPerPage;
+        const paginated = galleryData.slice(start, start + itemsPerPage);
+
+        paginated.forEach((item, index) => {
+          // Create masonry-like effect with spans
+          const spanClass =
+            index % 5 === 0 ? "col-span-2 row-span-2" : "col-span-1 row-span-1";
+          grid.innerHTML += `
+                <div class="${spanClass} relative group overflow-hidden rounded-xl cursor-pointer">
+                    <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-center p-2">
+                        ${item.title}
+                    </div>
+                </div>
+              `;
+        });
+        createPagination(
+          galleryData.length,
+          itemsPerPage,
+          page,
+          "gallery-pagination",
+          renderGallery
+        );
+      }
+
+      // ================= MODAL LOGIC =================
+      function openModal(type, id) {
+        let data;
+        if (type === "news") data = newsData.find((i) => i.id === id);
+        if (type === "event") data = eventsData.find((i) => i.id === id);
+
+        if (!data) return;
+
+        const modal = document.getElementById("content-modal");
+        const img = document.getElementById("modal-img");
+        const title = document.getElementById("modal-title");
+        const date = document.getElementById("modal-date");
+        const loc = document.getElementById("modal-location");
+        const tag = document.getElementById("modal-tag");
+        const content = document.getElementById("modal-content");
+
+        img.src = data.image;
+        title.textContent = data.title;
+        date.textContent = "📅 " + data.date;
+        content.innerHTML = data.content;
+
+        if (type === "event") {
+          tag.textContent = data.status;
+          loc.textContent = "📍 " + data.location;
+          loc.classList.remove("hidden");
+        } else {
+          tag.textContent = "NEWS UPDATE";
+          loc.classList.add("hidden");
+        }
+
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("content-modal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // ================= ANIMATION =================
+      let animated = false;
+      const counters = document.querySelectorAll(".counter");
+      const speed = 200;
+      const animateCounters = () => {
+        if (animated) return;
+        counters.forEach((counter) => {
+          const updateCount = () => {
+            const target = +counter.getAttribute("data-target");
+            const count = +counter.innerText.replace(",", "").replace("+", "");
+            const inc = target / speed;
+            if (count < target) {
+              counter.innerText = Math.ceil(count + inc).toLocaleString();
+              setTimeout(updateCount, 20);
+            } else {
+              counter.innerText = target.toLocaleString() + "+";
+            }
+          };
+          updateCount();
+        });
+        animated = true;
+      };
+
+      // ================= INIT =================
+      window.addEventListener("DOMContentLoaded", () => {
+        renderHomeComponents();
+        renderEvents();
+        renderNews();
+        renderGallery();
+        setTimeout(animateCounters, 500);
+      });
+    </script>
+  </body>
+</html>
