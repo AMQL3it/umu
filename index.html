@@ -872,7 +872,7 @@
           location: ["Dubai", "Istanbul", "London", "New York", "Kuala Lumpur"][
             i % 5
           ],
-          image: `https://placehold.co/600x400?text=${type}+${i + 1}`,
+          image: `https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg`,
           summary: `Summary for ${type} ${
             i + 1
           }. This is a brief description of the content shown in the card view.`,
@@ -890,7 +890,7 @@
         date: "Oct 25, 2026",
         status: "upcoming",
         location: "Istanbul, Turkey",
-        image: "https://placehold.co/800x500?text=Unity+Summit",
+        image: "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?w=800&h=500&fit=crop",
         summary:
           "Bringing together leaders from 50 nations to discuss unity, economic cooperation, and the future of the Ummah.",
         content:
@@ -898,7 +898,64 @@
       };
 
       const newsData = generateItems(25, "News");
-      const galleryData = generateItems(30, "Photo");
+            // Enrich event data with varied Islamic images
+            eventsData.forEach((event, index) => {
+              const eventImages = [
+                "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+                "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+                "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg"
+              ];
+              event.image = eventImages[index % eventImages.length];
+            });
+      
+            // Enrich news data with varied Islamic images
+            newsData.forEach((news, index) => {
+              const newsImages = [
+                "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+                "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+                "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg"
+              ];
+              news.image = newsImages[index % newsImages.length];
+            });
+      
+      // Islamic & Dawah Related Gallery Images from Pexels & Pixabay
+      const galleryImages = [
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
+        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
+        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+      ];
+      
+      const galleryData = generateItems(30, "Photo").map((item, index) => ({
+        ...item,
+        image: galleryImages[index % galleryImages.length],
+      }));
 
       // ================= STATE =================
       const state = {
