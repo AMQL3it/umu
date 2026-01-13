@@ -440,10 +440,11 @@ let animated = false;
 - **No other dependencies**
 
 ### For Next.js Migration:
-- Next.js 14+ (with App Router recommended)
-- React 18+
-- Tailwind CSS (npm package)
-- Optional: React Router (for internal routing)
+- Next.js 16+ (with App Router)
+- React 19+
+- Tailwind CSS (npm package v4)
+- Babel React Compiler
+- ESLint with Next.js config
 
 ---
 
@@ -453,35 +454,33 @@ let animated = false;
 ```
 src/
 ├── app/
-│   ├── layout.tsx (Header, Footer, Providers)
-│   ├── page.tsx (Home/Landing Page)
+│   ├── layout.jsx (Header, Footer, Providers)
+│   ├── page.jsx (Home/Landing Page)
 │   ├── events/
-│   │   └── page.tsx
+│   │   └── page.jsx
 │   ├── news/
-│   │   └── page.tsx
+│   │   └── page.jsx
 │   └── gallery/
-│       └── page.tsx
+│       └── page.jsx
 ├── components/
-│   ├── Header.tsx
-│   ├── Footer.tsx
-│   ├── Navigation.tsx
-│   ├── MobileMenu.tsx
-│   ├── Modal.tsx
-│   ├── EventCard.tsx
-│   ├── NewsCard.tsx
-│   ├── GalleryCard.tsx
-│   ├── Carousel.tsx
-│   ├── Pagination.tsx
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── Navigation.jsx
+│   ├── MobileMenu.jsx
+│   ├── Modal.jsx
+│   ├── EventCard.jsx
+│   ├── NewsCard.jsx
+│   ├── GalleryCard.jsx
+│   ├── Carousel.jsx
+│   ├── Pagination.jsx
 │   └── ...
 ├── data/
-│   ├── events.ts
-│   ├── news.ts
-│   ├── gallery.ts
-│   └── constants.ts
+│   ├── events.js
+│   ├── news.js
+│   ├── gallery.js
+│   └── constants.js
 ├── hooks/
-│   └── useNavigation.ts
-├── types/
-│   └── index.ts
+│   └── useNavigation.js
 ├── styles/
 │   └── globals.css (Tailwind imports)
 └── public/
@@ -495,7 +494,7 @@ src/
 
 ### Tailwind Configuration Needed:
 ```javascript
-// tailwind.config.ts
+// tailwind.config.js
 export default {
   theme: {
     extend: {
@@ -566,6 +565,7 @@ export default {
 - [ ] useRouter (page navigation)
 - [ ] useState (modal state, pagination, filters)
 - [ ] useEffect (animations, data loading)
+- [ ] useCallback (optimize callbacks)
 
 **Pages:**
 - [ ] Home (/)
