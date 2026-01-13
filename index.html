@@ -196,7 +196,7 @@
             href="#mission-section"
             onclick="handleNavClick('mission-section')"
             class="nav-link text-white text-sm font-semibold hover:text-gold transition-colors"
-            >Our Mission</a
+            >About</a
           >
           <a
             href="#"
@@ -824,6 +824,7 @@
           <img
             id="modal-img"
             src=""
+            onerror="this.src='https://placehold.co/800x500?text=Image+Unavailable'"
             class="w-full h-full object-cover"
             alt="Header"
           />
@@ -882,80 +883,145 @@
         }));
       };
 
-      const eventsData = generateItems(20, "Event");
-      // Set a specific featured event for Home
-      eventsData[0] = {
-        id: 1,
-        title: "Global Unity Summit 2026",
-        date: "Oct 25, 2026",
-        status: "upcoming",
-        location: "Istanbul, Turkey",
-        image: "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?w=800&h=500&fit=crop",
-        summary:
-          "Bringing together leaders from 50 nations to discuss unity, economic cooperation, and the future of the Ummah.",
-        content:
-          "<p>The Global Unity Summit 2026 represents a pivotal moment for the Muslim world. Delegates from over 50 nations will convene in Istanbul.</p><p>Key topics include:</p><ul class='list-disc pl-5 mt-2 mb-4'><li>Economic Trade Zones</li><li>Educational Standardization</li><li>Healthcare Infrastructure</li></ul><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
-      };
+      // Islamic Events Data with proper categorization
+      const eventsData = [
+        {
+          id: 1,
+          title: "Quran Competition 2026",
+          date: "Mar 15, 2026",
+          status: "upcoming",
+          location: "Dubai, UAE",
+          image: "https://images.unsplash.com/photo-1516763981299-3441867b20c7?w=800&h=500&fit=crop",
+          summary: "Annual Quran memorization and recitation competition bringing together the finest Huffaz from around the world.",
+          content: "<p>Join us for the prestigious Quran Competition 2026, a celebration of Islamic scholarship and devotion.</p><p><strong>Key Details:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Tajweed Recitation Category</li><li>Hafiz Memorization Category</li><li>Youth Category (Under 18)</li><li>Prize Fund: $500,000</li></ul><p>Contestants from 60+ countries will showcase their dedication to preserving the Quran.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+        },
+        {
+          id: 2,
+          title: "Quran Meaning & Tafsir Event",
+          date: "Apr 20, 2026",
+          status: "upcoming",
+          location: "Istanbul, Turkey",
+          image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=500&fit=crop",
+          summary: "Deep dive into Quranic interpretation with leading Islamic scholars and Mufassiroon.",
+          content: "<p>Explore the profound meanings of the Quran with renowned Islamic scholars.</p><p><strong>Program Highlights:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Daily Tafsir Sessions</li><li>Interactive Q&A with Scholars</li><li>Workshops on Quranic Arabic</li><li>Book Launch: 'Modern Tafsir Perspectives'</li></ul><p>Duration: 5 Days | Language: Arabic, English, Urdu</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+        },
+        {
+          id: 3,
+          title: "Islamic History & Culture Expo",
+          date: "May 10, 2026",
+          status: "ongoing",
+          location: "Cairo, Egypt",
+          image: "https://images.unsplash.com/photo-1565008576549-bdde6da515e6?w=800&h=500&fit=crop",
+          summary: "Celebrate 1400+ years of Islamic civilization through exhibitions, artifacts, and cultural performances.",
+          content: "<p>Discover the rich heritage and contributions of Islamic civilization to world culture.</p><p><strong>Exhibition Areas:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Islamic Architecture Through Ages</li><li>Scientific Achievements & Innovations</li><li>Art, Calligraphy & Craftsmanship</li><li>Literature & Poetry</li><li>Traditional Clothing & Fashion</li></ul><p>Live demonstrations, workshops, and cultural performances daily.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Get Tickets</button>",
+        },
+        {
+          id: 4,
+          title: "Quiz Competition on Islamic Knowledge",
+          date: "Jun 05, 2026",
+          status: "upcoming",
+          location: "London, UK",
+          image: "https://images.unsplash.com/photo-1507842072343-583f20270319?w=800&h=500&fit=crop",
+          summary: "Test your Islamic knowledge in this competitive quiz covering Quran, Hadith, Islamic History, and Fiqh.",
+          content: "<p>Challenge yourself in our comprehensive Islamic knowledge quiz competition.</p><p><strong>Competition Categories:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Individual Quiz Championship</li><li>Team Category (4 members)</li><li>Youth League (Ages 12-18)</li><li>University Challenge</li></ul><p><strong>Prize Pool:</strong> $100,000 | <strong>Registration Fee:</strong> Free for youth category</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+        },
+        {
+          id: 5,
+          title: "Mosque Architecture & Design Symposium",
+          date: "Jul 12, 2026",
+          status: "upcoming",
+          location: "Kuala Lumpur, Malaysia",
+          image: "https://images.unsplash.com/photo-1598209822033-67451991f706?w=800&h=500&fit=crop",
+          summary: "Explore contemporary mosque design and restoration of historical Islamic architecture.",
+          content: "<p>A comprehensive symposium on mosque architecture combining tradition with modern sustainability.</p><p><strong>Topics Covered:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Historical Mosque Preservation</li><li>Modern Sustainable Design</li><li>Calligraphy & Interior Decoration</li><li>Community Space Integration</li></ul><p>Featuring renowned architects and heritage conservationists from around the world.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+        },
+        {
+          id: 6,
+          title: "Islamic Awareness & Education Movement",
+          date: "Aug 01, 2026",
+          status: "ongoing",
+          location: "Global Online",
+          image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&h=500&fit=crop",
+          summary: "Global campaign to promote Islamic education and counter misconceptions about Islam.",
+          content: "<p>Join our international movement to educate the world about true Islamic teachings and values.</p><p><strong>Campaign Initiatives:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Online Lectures & Webinars</li><li>Educational Documentary Series</li><li>Social Media Awareness Campaign</li><li>Community Outreach Programs</li></ul><p>Participants needed for content creation, translation, and community engagement.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Join Movement</button>",
+        },
+        {
+          id: 7,
+          title: "Halal Expo 2026",
+          date: "Sep 08, 2026",
+          status: "upcoming",
+          location: "Singapore",
+          image: "https://images.unsplash.com/photo-1504674900968-a7621bbb67ad?w=800&h=500&fit=crop",
+          summary: "World's largest halal food, beverage, cosmetics, and lifestyle products exhibition.",
+          content: "<p>Experience the growing halal industry with 500+ exhibitors from 40+ countries.</p><p><strong>Exhibition Features:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Halal Food & Beverage Showcase</li><li>Cosmetics & Personal Care</li><li>Fashion & Modest Wear</li><li>Tourism & Hospitality</li><li>Financial Services</li><li>Networking & B2B Meetings</li></ul><p>Conferences, cooking demonstrations, and product launches throughout the event.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Book Booth</button>",
+        },
+        {
+          id: 8,
+          title: "Educational Expo: Islamic Learning Pathways",
+          date: "Oct 01, 2026",
+          status: "upcoming",
+          location: "Beirut, Lebanon",
+          image: "https://images.unsplash.com/photo-1427504494785-cdfc993dc4d1?w=800&h=500&fit=crop",
+          summary: "Comprehensive educational expo featuring Islamic schools, universities, and online learning platforms.",
+          content: "<p>Discover educational opportunities in Islamic and secular fields across the Muslim world.</p><p><strong>Participating Institutions:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Top Islamic Universities</li><li>International School Networks</li><li>Online Learning Platforms</li><li>Scholarship Programs</li><li>Vocational Training Centers</li></ul><p>Meet educators, get counseling, and explore scholarship opportunities.</p><button class='bg-primary text-white px-6 py-2 rounded font-bold'>Register Now</button>",
+        },
+        {
+          id: 9,
+          title: "Islamic Finance & Economics Conference",
+          date: "Oct 15, 2026",
+          status: "previous",
+          location: "Bahrain",
+          image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop",
+          summary: "Discuss Islamic banking, Sukuk markets, and Shariah-compliant investments.",
+          content: "<p>A pivotal gathering of Islamic finance experts and economic leaders.</p><p><strong>Key Discussions:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Digital Islamic Finance</li><li>Cryptocurrency & Blockchain in Islamic Finance</li><li>Sustainable Development Goals</li><li>Investment in Muslim Communities</li></ul>",
+        },
+        {
+          id: 10,
+          title: "Interfaith Dialogue Summit",
+          date: "Nov 05, 2026",
+          status: "previous",
+          location: "Vienna, Austria",
+          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop",
+          summary: "Building bridges between Muslim, Christian, Jewish, and other faith communities worldwide.",
+          content: "<p>A historic gathering promoting understanding and cooperation between faiths.</p><p><strong>Goals:</strong></p><ul class='list-disc pl-5 mt-2 mb-4'><li>Interfaith Peace Initiatives</li><li>Joint Humanitarian Projects</li><li>Educational Exchange Programs</li><li>Combating Extremism Together</li></ul>",
+        },
+      ];
 
       const newsData = generateItems(25, "News");
-            // Enrich event data with varied Islamic images
-            eventsData.forEach((event, index) => {
-              const eventImages = [
-                "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-                "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-                "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg"
-              ];
-              event.image = eventImages[index % eventImages.length];
-            });
       
-            // Enrich news data with varied Islamic images
-            newsData.forEach((news, index) => {
-              const newsImages = [
-                "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-                "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-                "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg"
-              ];
-              news.image = newsImages[index % newsImages.length];
-            });
-      
-      // Islamic & Dawah Related Gallery Images from Pexels & Pixabay
-      const galleryImages = [
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
-        "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg",
-        "https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg",
-        "https://images.pexels.com/photos/3942682/pexels-photo-3942682.jpeg",
+      // Islamic & Culture Related Gallery with Titles
+      const galleryData = [
+        { id: 1, title: "Beautiful Islamic Calligraphy", image: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb?w=500&h=500&fit=crop" },
+        { id: 2, title: "Historic Mosque Architecture", image: "https://images.unsplash.com/photo-1516763981299-3441867b20c7?w=500&h=500&fit=crop" },
+        { id: 3, title: "Quranic Verses Display", image: "https://images.unsplash.com/photo-1565008576549-bdde6da515e6?w=500&h=500&fit=crop" },
+        { id: 4, title: "Islamic Cultural Festival", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&h=500&fit=crop" },
+        { id: 5, title: "Grand Mosque Interior", image: "https://images.unsplash.com/photo-1598209822033-67451991f706?w=500&h=500&fit=crop" },
+        { id: 6, title: "Ramadan Celebrations", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&h=500&fit=crop" },
+        { id: 7, title: "Islamic Art & Patterns", image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=500&h=500&fit=crop" },
+        { id: 8, title: "Ummah Unity Event", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop" },
+        { id: 9, title: "Quran Competition Finals", image: "https://images.unsplash.com/photo-1507842072343-583f20270319?w=500&h=500&fit=crop" },
+        { id: 10, title: "Mosque Dome & Minarets", image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&h=500&fit=crop" },
+        { id: 11, title: "Islamic Educational Programs", image: "https://images.unsplash.com/photo-1427504494785-cdfc993dc4d1?w=500&h=500&fit=crop" },
+        { id: 12, title: "Historical Islamic Manuscripts", image: "https://images.unsplash.com/photo-1507842072343-583f20270319?w=500&h=500&fit=crop" },
+        { id: 13, title: "Cultural Heritage Preservation", image: "https://images.unsplash.com/photo-1565008576549-bdde6da515e6?w=500&h=500&fit=crop" },
+        { id: 14, title: "Islamic Geometric Art", image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=500&h=500&fit=crop" },
+        { id: 15, title: "Eid Festival Gathering", image: "https://images.unsplash.com/photo-1516763981299-3441867b20c7?w=500&h=500&fit=crop" },
+        { id: 16, title: "Beautiful Islamic Tiles", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&h=500&fit=crop" },
+        { id: 17, title: "Halal Expo Exhibition", image: "https://images.unsplash.com/photo-1504674900968-a7621bbb67ad?w=500&h=500&fit=crop" },
+        { id: 18, title: "Islamic Science & Innovation", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=500&fit=crop" },
+        { id: 19, title: "Community Service Initiative", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&h=500&fit=crop" },
+        { id: 20, title: "Islamic Fashion Week", image: "https://images.unsplash.com/photo-1565008576549-bdde6da515e6?w=500&h=500&fit=crop" },
+        { id: 21, title: "Mosque Courtyard Evening", image: "https://images.unsplash.com/photo-1516763981299-3441867b20c7?w=500&h=500&fit=crop" },
+        { id: 22, title: "Islamic Knowledge Gathering", image: "https://images.unsplash.com/photo-1598209822033-67451991f706?w=500&h=500&fit=crop" },
+        { id: 23, title: "Sufi Spiritual Music", image: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb?w=500&h=500&fit=crop" },
+        { id: 24, title: "Islamic Calligraphy Workshop", image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=500&h=500&fit=crop" },
+        { id: 25, title: "Global Muslim Solidarity", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&h=500&fit=crop" },
+        { id: 26, title: "Young Scholars Discussion", image: "https://images.unsplash.com/photo-1427504494785-cdfc993dc4d1?w=500&h=500&fit=crop" },
+        { id: 27, title: "Islamic Architecture Tour", image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&h=500&fit=crop" },
+        { id: 28, title: "Community Iftar Gathering", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&h=500&fit=crop" },
+        { id: 29, title: "Islamic Heritage Museum", image: "https://images.unsplash.com/photo-1504674900968-a7621bbb67ad?w=500&h=500&fit=crop" },
+        { id: 30, title: "Unity in Diversity", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop" },
       ];
-      
-      const galleryData = generateItems(30, "Photo").map((item, index) => ({
-        ...item,
-        image: galleryImages[index % galleryImages.length],
-      }));
 
       // ================= STATE =================
       const state = {
@@ -1033,7 +1099,7 @@
         const latestEvent = eventsData[0];
         const eventHTML = `
             <div class="md:w-1/2 h-64 md:h-auto relative">
-                <img src="${latestEvent.image}" class="w-full h-full object-cover" alt="Event">
+                <img src="${latestEvent.image}" onerror="this.src='https://placehold.co/800x500?text=Image+Unavailable'" class="w-full h-full object-cover" alt="Event">
                 <div class="absolute top-4 left-4 bg-gold text-primary-dark font-bold px-3 py-1 rounded shadow-md text-sm">UPCOMING</div>
             </div>
             <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center text-left">
@@ -1057,7 +1123,7 @@
           .map(
             (item) => `
             <div class="flex-none w-72 h-80 relative rounded-xl overflow-hidden snap-center cursor-pointer group" onclick="router('gallery')">
-                <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
+                <img src="${item.image}" onerror="this.src='https://placehold.co/500x600?text=Image+Unavailable'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-90"></div>
                 <div class="absolute bottom-4 left-4 text-white">
                     <p class="font-bold text-lg">${item.title}</p>
@@ -1075,7 +1141,7 @@
             (item) => `
             <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden snap-center cursor-pointer hover:-translate-y-1 transition-transform border border-gray-100 flex flex-col" onclick="openModal('news', ${item.id})">
                 <div class="h-48 overflow-hidden">
-                    <img src="${item.image}" class="w-full h-full object-cover" alt="News">
+                    <img src="${item.image}" onerror="this.src='https://placehold.co/800x500?text=Image+Unavailable'" class="w-full h-full object-cover" alt="News">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <span class="text-gold font-bold text-xs uppercase mb-2">${item.date}</span>
@@ -1187,7 +1253,7 @@
           grid.innerHTML += `
                   <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100 group flex flex-col h-full">
                       <div class="relative h-48 overflow-hidden">
-                          <img src="${event.image}" alt="${event.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                          <img src="${event.image}" onerror="this.src='https://placehold.co/800x500?text=Image+Unavailable'" alt="${event.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                           <span class="absolute top-4 right-4 ${badgeColor} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-sm">${event.status}</span>
                       </div>
                       <div class="p-6 flex flex-col flex-grow">
@@ -1237,7 +1303,7 @@
         paginated.forEach((news) => {
           grid.innerHTML += `
                   <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-300 cursor-pointer h-full flex flex-col" onclick="openModal('news', ${news.id})">
-                      <img src="${news.image}" class="w-full h-48 object-cover" alt="${news.title}">
+                      <img src="${news.image}" onerror="this.src='https://placehold.co/800x500?text=Image+Unavailable'" class="w-full h-48 object-cover" alt="${news.title}">
                       <div class="p-6 flex flex-col flex-grow">
                           <span class="text-gold font-bold text-xs uppercase mb-2">${news.date}</span>
                           <h3 class="text-xl font-bold text-primary mb-3 leading-tight">${news.title}</h3>
@@ -1272,7 +1338,7 @@
             index % 5 === 0 ? "col-span-2 row-span-2" : "col-span-1 row-span-1";
           grid.innerHTML += `
                 <div class="${spanClass} relative group overflow-hidden rounded-xl cursor-pointer">
-                    <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
+                    <img src="${item.image}" onerror="this.src='https://placehold.co/600x600?text=Image+Unavailable'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery">
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-center p-2">
                         ${item.title}
                     </div>
